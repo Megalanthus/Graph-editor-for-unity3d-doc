@@ -1,0 +1,9 @@
+﻿<UXML xmlns="UnityEngine.UIElements" xmlns:ge="GraphEditor.UIElements">
+    <VisualElement class="node-row">
+        <VisualElement class="node-spacer"/>
+        <Label class="port-label" text="Output port"/>
+        <ge:PortVisual name="Random output"/>
+    </VisualElement>
+    <Label name="random-value" binding-path="RandomValue"/>
+    <Button name="generate" text="Generate random"/>
+</UXML>

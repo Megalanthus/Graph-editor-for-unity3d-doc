@@ -1,0 +1,8 @@
+﻿<UXML xmlns="UnityEngine.UIElements" xmlns:ue="UnityEditor.UIElements" xmlns:ge="GraphEditor.UIElements">
+    <VisualElement class="node-row">
+        <VisualElement class="node-spacer"/>
+        <Label class="port-label" text="Output port"/>
+        <ge:PortVisual name="Integer output"/>
+    </VisualElement>
+    <ue:IntegerField name="integer-input" binding-path="IntValue"/>
+</UXML>

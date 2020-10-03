@@ -1,0 +1,10 @@
+﻿.port {
+    background-color: white;
+    color: white;
+}
+
+.pin{
+    background-color: black;
+    flex-grow: 1;
+    border-radius: 4;
+}

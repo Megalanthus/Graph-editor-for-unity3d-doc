@@ -1,0 +1,5 @@
+﻿<UXML xmlns="UnityEngine.UIElements">
+    <TextElement text="This node calculates the average of the input data."/>
+    <TextElement text="Button 'Add input' adds an additional input."/>
+    <TextElement text="Button 'Remove input' remove the last input."/>
+</UXML>

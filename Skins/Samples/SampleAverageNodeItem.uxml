@@ -1,0 +1,5 @@
+﻿<UXML xmlns="UnityEngine.UIElements" xmlns:ge="GraphEditor.UIElements">
+    <ge:PortVisual class="template-port"/>
+    <Label class="port-label"/>
+    <VisualElement class="node-spacer"/>
+</UXML>

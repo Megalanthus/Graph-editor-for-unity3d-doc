@@ -1,0 +1,7 @@
+﻿.help-popup-window {
+    background-color: aliceblue;
+    border-radius: 8;
+    opacity: 1;
+    flex-grow: 1;
+    padding: 10;
+}

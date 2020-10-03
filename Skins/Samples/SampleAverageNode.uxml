@@ -1,0 +1,10 @@
+﻿<UXML xmlns="UnityEngine.UIElements" xmlns:ge="GraphEditor.UIElements">
+    <VisualElement name="port-container"/>
+    <VisualElement class="node-row">
+        <VisualElement class="node-spacer"/>
+        <Label class="port-label" text="Output"/>
+        <ge:PortVisual name="Output"/>
+    </VisualElement>
+    <Button name="add-input" text="Add input"/>
+    <Button name="remove-input" text="Remove input"/>
+</UXML>

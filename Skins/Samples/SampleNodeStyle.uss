@@ -1,0 +1,26 @@
+﻿.node {
+    background-color: chocolate;
+    opacity: 0.7;
+}
+
+.node-selected {
+    border-color: rgb(106, 255, 114);
+}
+
+.title-text, .unity-label {
+    color: rgb(255, 255, 255);
+    padding: 0 4;
+}
+
+.port-label {
+    color: rgb(255, 255, 255);
+    -unity-text-align: middle-center;
+}
+
+.node-row {
+    flex-direction: row;
+}
+
+.node-spacer {
+    flex-grow: 1;
+}
