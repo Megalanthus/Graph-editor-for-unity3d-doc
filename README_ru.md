@@ -1,6 +1,6 @@
 ﻿# Редактор графов для Unity3d
 
-[Graph editor Version 1.0.](http://u3d.as/22My)
+[Graph editor Version 1.1.](http://u3d.as/22My)
 
 Copyright (c) Marshalkin Aleksey <megalanthus@gmail.com>
 
@@ -58,6 +58,7 @@ Copyright (c) Marshalkin Aleksey <megalanthus@gmail.com>
   - [PortTypeConnection.cs](#enums-port-type-connection)
 - [История изменений](#history)
   - [Версия 1.0](#history-1-0)
+  - [Версия 1.1](#history-1-1)
 
 
 
@@ -862,8 +863,12 @@ SampleAverageNodeHelp.uxml:
 **Методы**
 - ***static void OpenGraph(string path)***
   Открыть файл в редакторе.
-- ***static void CloseEditorWindow()***
+- ***static void CloseWindow()***
   Закрыть окно редактора.
+- ***static void UpdateWindow()***
+  Обновляет окно редактора.
+- ***static void CenteringNode(Node node)***
+  Центрирует узел в окне редактора.
 
 
 <a name="scripts-graph"></a>
@@ -871,6 +876,8 @@ SampleAverageNodeHelp.uxml:
 Базовый абстрактный класс графа. Используется для хранения графа.
 
 **Поля и свойства**
+- ***bool AutoCalculate***
+  Если истина, то будет выполняться автоматический расчет графа.
 - ***int CountNodes***
   Количество узлов в графе.
 - ***IEnumerable\<Node\> EnumNodes***
@@ -890,8 +897,6 @@ SampleAverageNodeHelp.uxml:
 <a name="scripts-graph-force-calculate-graph"></a>
 - ***void ForceCalculateGraph()***
   Пересчитать весь граф.
-- ***void Update()***
-  Обновить визуальное представление графа.
 
 **События (для обработки, переопределить метод)**
 - ***void OnOpenGraph()***
@@ -967,7 +972,7 @@ SampleAverageNodeHelp.uxml:
   Пересчитать узел и все зависимые узлы.
 
 **События (для обработки, переопределить метод)**
-- ***void OnCreateNode()***
+- ***void OnCreate()***
   Вызывается однократно при создании (клонировании) узла. В этом методе удобно инициализировать уникальные данные узла. Не вызывается при открытии графа.
 <a name="scripts-node-on-create-content"></a>
 - ***void OnCreateContent(VisualElement nodeVisual)***
@@ -985,6 +990,8 @@ SampleAverageNodeHelp.uxml:
 <a name="scripts-node-on-calculate"></a>
 - ***void OnCalculate()***
   Вызывается при расчете узла. В этом методе необходимо отправить данные в выходные порты (установить свойство Value выходных портов).
+- ***void OnRemove()***
+  Вызывается перед удалением узла.
 
 
 <a name="scripts-port"></a>
@@ -1059,3 +1066,16 @@ SampleAverageNodeHelp.uxml:
 <a name="history-1-0"></a>
 ## Версия 1.0
 Оригинальная версия.
+
+
+<a name="history-1-1"></a>
+## Версия 1.1
+- Исправлена некорректная отрисовка соединений.
+- Исправлен баг при скролле графа.
+- Метод GraphEditor.CloseEditorWindow перенаименован в GraphEditor.CloseWindow.
+- Добавлен метод GraphEditor.UpdateWindow.
+- Добавлен метод GraphEditor.CenteringNode.
+- Удален метод Graph.Update.
+- Добавлено свойство Graph.AutoCalculate, позволяющее выключить авторасчет графа.
+- Метод Node.OnCreateNode перенаименован в Node.OnCreate.
+- Добавлен метод Node.OnRemove.

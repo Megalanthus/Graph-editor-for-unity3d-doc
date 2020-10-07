@@ -1,6 +1,6 @@
 # Graph editor for Unity3d
 
-[Graph editor Version 1.0.](http://u3d.as/22My)
+[Graph editor Version 1.1.](http://u3d.as/22My)
 
 Copyright (c) Marshalkin Aleksey <megalanthus@gmail.com>
 
@@ -58,6 +58,7 @@ Copyright (c) Marshalkin Aleksey <megalanthus@gmail.com>
   - [PortTypeConnection.cs](#enums-port-type-connection)
 - [Change history](#history)
   - [Version 1.0](#history-1-0)
+  - [Version 1.1](#history-1-1)
 
 
 
@@ -862,8 +863,12 @@ Graph editor.
 **Methods**
 - ***static void OpenGraph(string path)***
   Open the file in the editor.
-- ***static void CloseEditorWindow()***
+- ***static void CloseWindow()***
   Close the editor window.
+- ***static void UpdateWindow()***
+  Update the graph editor window.
+- ***static void CenteringNode(Node node)***
+  Centers the node in the editor window.
 
 
 <a name="scripts-graph"></a>
@@ -871,6 +876,8 @@ Graph editor.
 Base abstract graph class. Used to store a graph.
 
 **Fields and properties**
+- ***bool AutoCalculate***
+  If true, then the graph will be automatically calculated.
 - ***int CountNodes***
   The number of nodes in the graph.
 - ***IEnumerable\<Node\> EnumNodes***
@@ -890,8 +897,6 @@ Base abstract graph class. Used to store a graph.
 <a name="scripts-graph-force-calculate-graph"></a>
 - ***void ForceCalculateGraph()***
   Recalculate the entire graph.
-- ***void Update()***
-  Refresh the visual representation of the graph.
 
 **Events (to handle, override method)**
 - ***void OnOpenGraph()***
@@ -967,7 +972,7 @@ The base abstract node class.
   Recalculate node and all dependent nodes.
 
 **Events (to handle, override method)**
-- ***void OnCreateNode()***
+- ***void OnCreate()***
   Called once when a node is created (cloned). In this method, it is convenient to initialize the unique data of the node. Not called when opening a graph.
 <a name="scripts-node-on-create-content"></a>
 - ***void OnCreateContent(VisualElement nodeVisual)***
@@ -985,6 +990,8 @@ The base abstract node class.
 <a name="scripts-node-on-calculate"></a>
 - ***void OnCalculate()***
   Called when calculating a node. In this method, you need to send data to the output ports (set the Value property of the output ports).
+- ***void OnRemove()***
+  Called before deleting a node.
 
 
 <a name="scripts-port"></a>
@@ -1059,3 +1066,16 @@ Port connection type.
 <a name="history-1-0"></a>
 ## Version 1.0
 Original version.
+
+
+<a name="history-1-1"></a>
+## Version 1.1
+- Fixed incorrect drawing of connections.
+- Fixed a bug when scrolling the graph.
+- The GraphEditor.CloseEditorWindow method has been renamed to GraphEditor.CloseWindow.
+- Added method GraphEditor.UpdateWindow.
+- Added method GraphEditor.CenteringNode.
+- Removed Graph.Update method.
+- Added property Graph.AutoCalculate, which allows to turn off graph auto-calculation.
+- The Node.OnCreateNode method has been renamed to Node.OnCreate.
+- Added Node.OnRemove method.
