@@ -11,6 +11,7 @@ using GraphEditor.Core;
 using GraphEditor.Core.Attributes;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
+using Object = UnityEngine.Object;
 
 namespace GraphEditor.Samples
 {
@@ -30,6 +31,11 @@ namespace GraphEditor.Samples
         {
             ObjectField objectField = nodeVisual.Q<ObjectField>("asset");
             objectField.objectType = typeof(SampleAsset);
+            objectField.RegisterCallback<ChangeEvent<Object>>(evt =>
+            {
+                Data.Asset = evt.newValue as SampleAsset;
+                UpdateAsset();
+            });
         }
 
         public override void OnChangeConnections()

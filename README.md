@@ -1,6 +1,6 @@
 # Graph editor for Unity3d
 
-[Graph editor Version 1.1.](http://u3d.as/22My)
+[Graph editor Version 1.2.](http://u3d.as/22My)
 
 Copyright (c) Marshalkin Aleksey <megalanthus@gmail.com>
 
@@ -59,6 +59,7 @@ Copyright (c) Marshalkin Aleksey <megalanthus@gmail.com>
 - [Change history](#history)
   - [Version 1.0](#history-1-0)
   - [Version 1.1](#history-1-1)
+  - [Version 1.2](#history-1-2)
 
 
 
@@ -193,6 +194,14 @@ namespace GraphEditor.Samples
 <a name="calculate-graph"></a>
 ## Graph calculation
 The graph is calculated automatically. If the graph is looped, then a partial calculation will be performed, and a warning will be displayed in the console.
+
+To disable automatic calculation, you need to override the [AutoCalculate](#scripts-graph-auto-calculate) graph property:
+```cs
+    public sealed class SampleGraph : Graph
+    {
+        public override bool AutoCalculate => false;
+    }
+```
 
 The graph is completely recalculated when:
 - opening the graph.
@@ -625,6 +634,11 @@ namespace GraphEditor.Samples
         {
             ObjectField objectField = nodeVisual.Q<ObjectField>("asset");
             objectField.objectType = typeof(SampleAsset);
+            objectField.RegisterCallback<ChangeEvent<Object>>(evt =>
+            {
+                Data.Asset = evt.newValue as SampleAsset;
+                UpdateAsset();
+            });
         }
 
         public override void OnChangeConnections()
@@ -868,7 +882,7 @@ Graph editor.
 - ***static void UpdateWindow()***
   Update the graph editor window.
 - ***static void CenteringNode(Node node)***
-  Centers the node in the editor window.
+  Centers and selects a node in the editor window.
 
 
 <a name="scripts-graph"></a>
@@ -876,6 +890,7 @@ Graph editor.
 Base abstract graph class. Used to store a graph.
 
 **Fields and properties**
+<a name="scripts-graph-auto-calculate"></a>
 - ***bool AutoCalculate***
   If true, then the graph will be automatically calculated.
 - ***int CountNodes***
@@ -1079,3 +1094,9 @@ Original version.
 - Added property Graph.AutoCalculate, which allows to turn off graph auto-calculation.
 - The Node.OnCreateNode method has been renamed to Node.OnCreate.
 - Added Node.OnRemove method.
+
+
+<a name="history-1-2"></a>
+## Version 1.2
+- Fixed a bug when dynamically changing a node.
+- Fixed bug in GraphEditor.CenteringNode method.

@@ -1,6 +1,6 @@
 ﻿# Редактор графов для Unity3d
 
-[Graph editor Version 1.1.](http://u3d.as/22My)
+[Graph editor Version 1.2.](http://u3d.as/22My)
 
 Copyright (c) Marshalkin Aleksey <megalanthus@gmail.com>
 
@@ -59,6 +59,7 @@ Copyright (c) Marshalkin Aleksey <megalanthus@gmail.com>
 - [История изменений](#history)
   - [Версия 1.0](#history-1-0)
   - [Версия 1.1](#history-1-1)
+  - [Версия 1.2](#history-1-2)
 
 
 
@@ -193,6 +194,14 @@ namespace GraphEditor.Samples
 <a name="calculate-graph"></a>
 ## Расчет графа
 Граф расчитывается автоматически. Если граф зациклен, то будет произведен частичный расчет, а в консоль будет выведено предупреждение.
+
+Для выключения автоматического расчета необходимо переопределить свойство графа [AutoCalculate](#scripts-graph-auto-calculate):
+```cs
+    public sealed class SampleGraph : Graph
+    {
+        public override bool AutoCalculate => false;
+    }
+```
 
 Граф полностью пересчитывается при:
 - открытии графа.
@@ -625,6 +634,11 @@ namespace GraphEditor.Samples
         {
             ObjectField objectField = nodeVisual.Q<ObjectField>("asset");
             objectField.objectType = typeof(SampleAsset);
+            objectField.RegisterCallback<ChangeEvent<Object>>(evt =>
+            {
+                Data.Asset = evt.newValue as SampleAsset;
+                UpdateAsset();
+            });
         }
 
         public override void OnChangeConnections()
@@ -868,7 +882,7 @@ SampleAverageNodeHelp.uxml:
 - ***static void UpdateWindow()***
   Обновляет окно редактора.
 - ***static void CenteringNode(Node node)***
-  Центрирует узел в окне редактора.
+  Центрирует и выделяет узел в окне редактора.
 
 
 <a name="scripts-graph"></a>
@@ -876,6 +890,7 @@ SampleAverageNodeHelp.uxml:
 Базовый абстрактный класс графа. Используется для хранения графа.
 
 **Поля и свойства**
+<a name="scripts-graph-auto-calculate"></a>
 - ***bool AutoCalculate***
   Если истина, то будет выполняться автоматический расчет графа.
 - ***int CountNodes***
@@ -1079,3 +1094,9 @@ SampleAverageNodeHelp.uxml:
 - Добавлено свойство Graph.AutoCalculate, позволяющее выключить авторасчет графа.
 - Метод Node.OnCreateNode перенаименован в Node.OnCreate.
 - Добавлен метод Node.OnRemove.
+
+
+<a name="history-1-2"></a>
+## Версия 1.2
+- Исправлена ошибка при динамическом изменении узла.
+- Исправлена ошибка в методе GraphEditor.CenteringNode.
